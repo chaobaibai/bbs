@@ -28,7 +28,6 @@ public class GithubUtils {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String accessToken = response.body().string().split("&")[0].split("=")[1];
-            System.out.println(accessToken);
             return accessToken;
         } catch (IOException e) {
             e.printStackTrace();
