@@ -12,6 +12,24 @@ public class User {
     private String token;
     private Long createTime;
     private Long modifiedTime;
+    private String bio;
+    private String imgUrl;
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
     public Integer getId() {
         return id;

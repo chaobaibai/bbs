@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>java社区</title>
+    <title>发布-java社区</title>
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/bootstrap-theme.css"/>
     <script src="js/bootstrap.min.js" type="application/javascript"></script>
 
 </head>
-<body>
+<body style="background: url(img/bg.jpg) repeat">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
 
@@ -31,9 +31,6 @@
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li th:if="${session.loginUser != null}">
-                        <a th:href="@{/publish}">发布</a>
-                    </li>
                     <li th:if="${session.loginUser == null}"><a href="https://github.com/login/oauth/authorize?client_id=00454ffc16e1687b1914&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a></li>
                     <li class="dropdown" th:if="${session.loginUser != null}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >[[${session.loginUser.name}]] <span class="caret"></span></a>
@@ -48,5 +45,37 @@
             </div>
         </div>
     </nav>
+    <div class="container-fluid" style="background-color: #fff;margin: 30px;">
+        <div class="row">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;发起</h2>
+                <hr/>
+                <form th:action="@{/publish}" method="post">
+                    <div class="form-group">
+                        <label for="titie">问题标题：</label>
+                        <input type="text" class="form-control" id="titie" name="title" placeholder="title"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">问题补充：</label>
+                        <textarea class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="tag">添加标签：</label>
+                        <input type="text" class="form-control" id="tag" name="tag" placeholder="输入格式如：java,数据库,计算机网络..."/>
+                    </div>
+                    <button type="submit" class="btn btn-success" style="float: right;margin-bottom: 16px;">发布</button>
+                </form>
+
+            </div>
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                <h3 style="margin-left: 23px">问题发起指南</h3>
+                <ul>
+                    <li>问题标题：请用简洁的语言描述您发布的问题，不超过25个字</li>
+                    <li>问题补充：详细补充您的问题内容，并确保问题描述清晰直观，并提供一些相关的资料</li>
+                    <li>选择标签：选择一个或者多个合适的标签，用逗号隔开，每个标签不超过10个字</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

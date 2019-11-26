@@ -57,6 +57,8 @@ public class AuthController {
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setCreateTime(System.currentTimeMillis());
             user.setModifiedTime(user.getCreateTime());
+            user.setBio(githubUser.getBio());
+            user.setImgUrl(githubUser.getAvatar_url());
             userMapper.addUser(user);
 
             response.addCookie(new Cookie("token",token));
