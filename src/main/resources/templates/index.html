@@ -9,7 +9,7 @@
     <script src="js/bootstrap.min.js" type="application/javascript"></script>
 
 </head>
-<body>
+<body style="background: url(img/bg.jpg) repeat">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
 
@@ -48,5 +48,32 @@
             </div>
         </div>
     </nav>
+    <div class="container-fluid" style="background-color: #fff;width:1200px;">
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span>&nbsp;&nbsp;发现</h2>
+                <hr/>
+                <div class="media" th:each="post:${posts}">
+                    <div class="media-left">
+                        <a href="#">
+                            <img width="38" th:each="entry:${userMap}" th:if="${entry.key}==${post.author}" class="media-object img-rounded" th:src="${entry.value.imgUrl}">
+                        </a>
+                    </div>
+                    <div class="media-body" >
+                        <h4 class="media-heading" th:text="${post.title}"></h4>
+                        <span th:each="entry:${userMap}" th:if="${entry.key}==${post.author}" th:text="${entry.value.name}"></span>
+                        <span style="font-size: 12px;font-weight: normal; color: #999;">发布了置顶文章 • <span th:text="${post.getCommentCount()}"></span> 个评论 • <span th:text="${post.getViewCount()}"></span> 次浏览 • <span th:text="${#dates.format(post.createTime,'yyyy-MM-dd')}"></span> 发布</span>
+                    </div>
+                    <hr/>
+                </div>
+
+
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <h3 style="margin-left: 23px">热门话题</h3>
+
+            </div>
+        </div>
+    </div>
 </body>
 </html>

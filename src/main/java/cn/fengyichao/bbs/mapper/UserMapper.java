@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * @author fengyichao
  * @date 2019/11/26 - 16:38
@@ -16,6 +18,9 @@ public interface UserMapper {
             "values(#{accountId},#{name},#{token},#{createTime},#{modifiedTime},#{bio},#{imgUrl})")
     void addUser(User user);
 
-    @Select("select id,account_id,name,token,create_time,modified_time from user where token = #{token}")
+    @Select("select id,account_id,name,token,create_time,modified_time,bio,img_url from user where token = #{token}")
     User getUserByToken(String token);
+
+    @Select("select id,account_id,name,token,create_time,modified_time,bio,img_url from user")
+    List<User> getAllUser();
 }
