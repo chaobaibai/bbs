@@ -4,48 +4,15 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>发布-java社区</title>
-    <link rel="stylesheet" href="css/bootstrap.css"/>
-    <link rel="stylesheet" href="css/bootstrap-theme.css"/>
-    <script src="js/bootstrap.min.js" type="application/javascript"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-theme.css}"/>
+    <script th:src="@{/js/jquery-2.1.0.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}" type="application/javascript"></script>
 
 </head>
-<body style="background: url(img/bg.jpg) repeat">
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">java社区</span>
-
-                </button>
-                <a class="navbar-brand" href="#">java社区</a>
-            </div>
-
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                <form class="navbar-form navbar-left" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="搜贴">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li th:if="${session.loginUser == null}"><a href="https://github.com/login/oauth/authorize?client_id=00454ffc16e1687b1914&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a></li>
-                    <li class="dropdown" th:if="${session.loginUser != null}">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >[[${session.loginUser.name}]] <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">个人中心</a></li>
-                            <li><a href="#">消息</a></li>
-                            <li><a href="#">退出登录</a></li>
-
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container-fluid" style="background-color: #fff;margin: 30px;">
+<body style="background: url(/img/bg.jpg) repeat">
+    <div th:replace="~{navigation::nav}"></div>
+    <div class="container-fluid" style="background-color: #fff;width:1200px;">
         <div class="row">
             <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                 <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;发起</h2>

@@ -60,8 +60,9 @@ public class AuthController {
             user.setBio(githubUser.getBio());
             user.setImgUrl(githubUser.getAvatar_url());
             userMapper.addUser(user);
-
-            response.addCookie(new Cookie("token",token));
+            Cookie cookie = new Cookie("token", token);
+            cookie.setMaxAge(60*60*24*30);
+            response.addCookie(cookie);
 
             return "redirect:/";
         }else{
