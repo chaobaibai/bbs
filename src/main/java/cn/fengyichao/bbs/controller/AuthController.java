@@ -3,9 +3,8 @@ package cn.fengyichao.bbs.controller;
 import cn.fengyichao.bbs.dto.AccessTokenDTO;
 import cn.fengyichao.bbs.dto.GithubUser;
 import cn.fengyichao.bbs.entity.User;
-import cn.fengyichao.bbs.mapper.UserMapper;
+import cn.fengyichao.bbs.service.UserService;
 import cn.fengyichao.bbs.utils.GithubUtils;
-import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -28,7 +27,7 @@ public class AuthController {
     private GithubUtils githubUtils;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
     @Value("${github.client_id}")
     private String client_id;
@@ -59,7 +58,7 @@ public class AuthController {
             user.setModifiedTime(user.getCreateTime());
             user.setBio(githubUser.getBio());
             user.setImgUrl(githubUser.getAvatar_url());
-            userMapper.addUser(user);
+            userService.updateUser(user);
             Cookie cookie = new Cookie("token", token);
             cookie.setMaxAge(60*60*24*30);
             response.addCookie(cookie);
@@ -68,6 +67,15 @@ public class AuthController {
         }else{
             return "redirect:/";
         }
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session,HttpServletResponse response){
+        session.removeAttribute("loginUser");
+        Cookie cookie = new Cookie("token",null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 
 }

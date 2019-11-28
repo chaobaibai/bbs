@@ -33,4 +33,8 @@ public class PostService {
         page.setList(posts);
         return page;
     }
+
+    public Post getPostById(Integer id) {
+        return postMapper.getPostById(id);
+    }
 }

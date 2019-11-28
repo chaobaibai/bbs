@@ -35,20 +35,6 @@ public class ProfileController {
                        @RequestParam(name="pageNum",defaultValue = "1") Integer pageNum,
                        @RequestParam(name="pageSize",defaultValue = "8") Integer pageSize){
 
-        Cookie[] cookies = request.getCookies();
-        if(cookies != null && cookies.length > 0){
-            for (Cookie cookie : cookies) {
-                if(cookie.getName().equals("token")){
-                    String token = cookie.getValue();
-                    User user = userMapper.getUserByToken(token);
-                    if(user != null){
-                        request.getSession().setAttribute("loginUser",user);
-                    }
-                    break;
-
-                }
-            }
-        }
         if(action.equals("posts")){
             model.addAttribute("section","posts");
             model.addAttribute("sectionName","我的帖子");

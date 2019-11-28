@@ -33,4 +33,7 @@ public interface PostMapper {
 
     @Select("select count(*) from post where author = #{author}")
     Long getPostTotalByAuthor(Integer author);
+
+    @Select("select id,title,content,author,comment_count,view_count,like_count,tag,create_time,modified_time from post where id = #{id}")
+    Post getPostById(Integer id);
 }

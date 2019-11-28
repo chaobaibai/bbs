@@ -3,7 +3,6 @@ package cn.fengyichao.bbs.controller;
 import cn.fengyichao.bbs.dto.Page;
 import cn.fengyichao.bbs.entity.Post;
 import cn.fengyichao.bbs.entity.User;
-import cn.fengyichao.bbs.mapper.PostMapper;
 import cn.fengyichao.bbs.mapper.UserMapper;
 import cn.fengyichao.bbs.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
@@ -30,21 +28,6 @@ public class IndexController{
     public String index(HttpServletRequest request, Model model,
                         @RequestParam(name="pageNum",defaultValue = "1") Integer pageNum,
                         @RequestParam(name="pageSize",defaultValue = "8") Integer pageSize){
-
-        Cookie[] cookies = request.getCookies();
-        if(cookies != null && cookies.length > 0){
-            for (Cookie cookie : cookies) {
-                if(cookie.getName().equals("token")){
-                    String token = cookie.getValue();
-                    User user = userMapper.getUserByToken(token);
-                    if(user != null){
-                        request.getSession().setAttribute("loginUser",user);
-                    }
-                    break;
-
-                }
-            }
-        }
 
         List<User> users = userMapper.getAllUser();
         HashMap<Integer,User> userMap = new HashMap<Integer,User>();  //存放userId和user对应关系
