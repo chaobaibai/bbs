@@ -37,4 +37,12 @@ public class PostService {
     public Post getPostById(Integer id) {
         return postMapper.getPostById(id);
     }
+
+    public void addPost(Post post){
+        postMapper.addPost(post);
+    }
+
+    public void updatePost(Post post){
+        postMapper.updatePost(post);
+    }
 }

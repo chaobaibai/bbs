@@ -36,4 +36,7 @@ public interface PostMapper {
 
     @Select("select id,title,content,author,comment_count,view_count,like_count,tag,create_time,modified_time from post where id = #{id}")
     Post getPostById(Integer id);
+
+    @Select("update post set title=#{title},content=#{content},tag=#{tag},modified_time=#{modifiedTime} where id = #{id}")
+    void updatePost(Post post);
 }
