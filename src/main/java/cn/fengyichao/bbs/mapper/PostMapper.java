@@ -1,10 +1,7 @@
 package cn.fengyichao.bbs.mapper;
 
 import cn.fengyichao.bbs.entity.Post;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -39,4 +36,10 @@ public interface PostMapper {
 
     @Select("update post set title=#{title},content=#{content},tag=#{tag},modified_time=#{modifiedTime} where id = #{id}")
     void updatePost(Post post);
+
+    @Update("update post set view_count = view_count + 1 where id = #{id}")
+    void incrViewCount(Integer id);
+
+    @Update("update post set comment_count = comment_count + 1 where id = #{id}")
+    void incrCommentCount(Integer id);
 }

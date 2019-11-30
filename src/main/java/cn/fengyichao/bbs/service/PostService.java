@@ -2,6 +2,7 @@ package cn.fengyichao.bbs.service;
 
 import cn.fengyichao.bbs.dto.Page;
 import cn.fengyichao.bbs.entity.Post;
+import cn.fengyichao.bbs.exception.NoEntityException;
 import cn.fengyichao.bbs.mapper.PostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,11 @@ public class PostService {
     }
 
     public Post getPostById(Integer id) {
-        return postMapper.getPostById(id);
+        Post post = postMapper.getPostById(id);
+        if(post == null){
+            throw new NoEntityException("没有查到该帖子。。。");
+        }
+        return post;
     }
 
     public void addPost(Post post){
@@ -44,5 +49,13 @@ public class PostService {
 
     public void updatePost(Post post){
         postMapper.updatePost(post);
+    }
+
+    public void incrViewCount(Integer id){
+        postMapper.incrViewCount(id);
+    }
+
+    public void incrCommentCount(Integer id){
+        postMapper.incrCommentCount(id);
     }
 }

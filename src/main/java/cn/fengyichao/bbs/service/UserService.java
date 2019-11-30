@@ -1,6 +1,7 @@
 package cn.fengyichao.bbs.service;
 
 import cn.fengyichao.bbs.entity.User;
+import cn.fengyichao.bbs.exception.NoEntityException;
 import cn.fengyichao.bbs.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,5 +28,13 @@ public class UserService {
             getedUser.setToken(user.getToken());
             userMapper.updateUser(getedUser);
         }
+    }
+
+    public User getUserById(Integer id){
+        User user = userMapper.getUserById(id);
+        if(user == null){
+            throw new NoEntityException("没有查到该用户。。。");
+        }
+        return user;
     }
 }

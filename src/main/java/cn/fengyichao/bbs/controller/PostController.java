@@ -2,8 +2,8 @@ package cn.fengyichao.bbs.controller;
 
 import cn.fengyichao.bbs.entity.Post;
 import cn.fengyichao.bbs.entity.User;
-import cn.fengyichao.bbs.mapper.UserMapper;
 import cn.fengyichao.bbs.service.PostService;
+import cn.fengyichao.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,14 +22,16 @@ public class PostController {
     private PostService postService;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
     @GetMapping("/post/{id}")
     public String post(@PathVariable(name = "id") Integer id, Model model){
         Post post = postService.getPostById(id);
-        User user = userMapper.getUserById(post.getAuthor());
+        User user = userService.getUserById(post.getAuthor());
         model.addAttribute("post",post);
         model.addAttribute("author",user);
+
+        postService.incrViewCount(id);  //更新帖子浏览数
         return "post";
     }
 }
