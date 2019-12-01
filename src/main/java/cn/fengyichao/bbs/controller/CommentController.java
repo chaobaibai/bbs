@@ -25,9 +25,9 @@ public class CommentController {
     @PostMapping("/comment")
     @ResponseBody
     public Result comment(@RequestBody  Comment comment, HttpSession session){
-        User user = (User)session.getAttribute("loginAuthor");
+        User user = (User)session.getAttribute("loginUser");
         if(user == null){
-            return new Result(400,"用户未登录无法评论");
+            return new Result(401,"用户未登录无法评论");
         }
         Comment commentDb =new Comment();
         commentDb.setAuthor(user.getId());
