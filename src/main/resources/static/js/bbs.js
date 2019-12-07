@@ -14,7 +14,8 @@ function comment(){
         }),
         success:function(data){
             if(data.code==200){
-                $("#commentArea").hide();
+                /*$("#commentArea").hide();*/
+                window.location.reload();
             }else if(data.code==401){
                 var isLogin = confirm("您还没有登录，是否确认登录？");
                 if(isLogin){
@@ -24,7 +25,7 @@ function comment(){
             }else{
                 alert(data.message);
             }
-            console.log(data);
+            console.log(data.list);
         },
         dataType:"json"
 

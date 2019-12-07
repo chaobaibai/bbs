@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 /**
  * @author fengyichao
  * @date 2019/11/30 - 14:23
@@ -56,4 +58,7 @@ public class CommentService {
 
     }
 
+    public List<Comment> getCommentsByPostId(Integer id) {
+        return commentMapper.getCommentByParentId(id,1);
+    }
 }

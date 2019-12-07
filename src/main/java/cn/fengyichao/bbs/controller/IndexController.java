@@ -3,8 +3,8 @@ package cn.fengyichao.bbs.controller;
 import cn.fengyichao.bbs.dto.Page;
 import cn.fengyichao.bbs.entity.Post;
 import cn.fengyichao.bbs.entity.User;
-import cn.fengyichao.bbs.mapper.UserMapper;
 import cn.fengyichao.bbs.service.PostService;
+import cn.fengyichao.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ import java.util.List;
 public class IndexController{
 
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
     @Autowired
     private PostService postService;
@@ -29,7 +29,7 @@ public class IndexController{
                         @RequestParam(name="pageNum",defaultValue = "1") Integer pageNum,
                         @RequestParam(name="pageSize",defaultValue = "8") Integer pageSize){
 
-        List<User> users = userMapper.getAllUser();
+        List<User> users = userService.getAllUser();
         HashMap<Integer,User> userMap = new HashMap<Integer,User>();  //存放userId和user对应关系
         for(User user: users){
             userMap.put(user.getId(),user);

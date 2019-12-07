@@ -6,6 +6,8 @@ import cn.fengyichao.bbs.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author fengyichao
  * @date 2019/11/28 - 18:24
@@ -36,5 +38,9 @@ public class UserService {
             throw new NoEntityException("没有查到该用户。。。");
         }
         return user;
+    }
+
+    public List<User> getAllUser(){
+        return userMapper.getAllUser();
     }
 }

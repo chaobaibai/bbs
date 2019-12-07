@@ -59,7 +59,7 @@ public class BbsExceptionHandler {
         response.setCharacterEncoding("UTF-8");
         try {
             PrintWriter writer = response.getWriter();
-            writer.write(JSON.toJSONString(new Result(400,message)));
+            writer.write(JSON.toJSONString(new Result(400,message,null)));
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();

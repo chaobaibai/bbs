@@ -27,7 +27,7 @@ public class CommentController {
     public Result comment(@RequestBody  Comment comment, HttpSession session){
         User user = (User)session.getAttribute("loginUser");
         if(user == null){
-            return new Result(401,"用户未登录无法评论");
+            return new Result(401,"用户未登录无法评论",null);
         }
         Comment commentDb =new Comment();
         commentDb.setAuthor(user.getId());
@@ -40,6 +40,7 @@ public class CommentController {
         comment.setCreateTime(System.currentTimeMillis());
         comment.setModifiedTime(comment.getCreateTime());
         commentService.addComment(comment);
+
         return Result.ok();
 
     }
